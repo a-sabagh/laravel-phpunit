@@ -32,11 +32,13 @@ class Handler extends ExceptionHandler
      * @param  \Exception  $exception
      * @return void
      */
-    public function report(Exception $exception)
-    {
-        parent::report($exception);
-    }
-
+	public function report(Exception $exception)
+	{
+		if(app()->environment() == "testing"){
+			throw $exception;
+		}
+		echo $exception->getMessage();
+	}
     /**
      * Render an exception into an HTTP response.
      *
